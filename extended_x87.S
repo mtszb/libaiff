@@ -1,5 +1,7 @@
+/*      $Id: extended_x87.S,v 1.2 2008/08/18 15:16:03 toad32767 Exp $    */
+
 /*-
- * Copyright (c) 2005, 2006, 2007, 2008 Marco Trillo
+ * Copyright (c) 2008 Marco Trillo
  *
  * Permission is hereby granted, free of charge, to any
  * person obtaining a copy of this software and associated
@@ -23,4 +25,41 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+/*
+ * Native routines to read/write 80-bit extended precision
+ * values in Intel 80x87 FPUs.
+ */
+
+#include "c_label.h"
+
+        .text
+	
+/*
+ * double x87_read_extended(const unsigned char *);
+ */
+        .align 2,0x90
+.globl _C_LABEL(x87_read_extended)
+_C_LABEL(x87_read_extended):
+	pushl	%ebp
+	movl	%esp, %ebp
+	movl    8(%ebp), %eax
+        fldt    (%eax)
+	leave
+	ret
+
+/*
+ * void x87_write_extended(double, unsigned char *);
+ */
+        .align 2,0x90
+.globl _C_LABEL(x87_write_extended)
+_C_LABEL(x87_write_extended):
+        pushl   %ebp
+        movl    %esp, %ebp
+        movl    16(%ebp), %eax
+        fldl    8(%ebp)
+        fstpt   (%eax)
+        leave
+        ret
+
 

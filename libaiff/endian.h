@@ -1,5 +1,7 @@
+/*	$Id: endian.h,v 1.5 2006/12/27 17:10:40 toad32767 Exp $ */
+
 /*-
- * Copyright (c) 2005, 2006, 2007, 2008 Marco Trillo
+ * Copyright (c) 2005, 2006 Marco Trillo
  *
  * Permission is hereby granted, free of charge, to any
  * person obtaining a copy of this software and associated
@@ -23,4 +25,24 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+
+/* === Endian-related stuff === */
+
+#define ARRANGE_ENDIAN_16(dat) ( (((dat) & 0xff00 ) >> 8 ) | (((dat) & 0x00ff ) << 8 ) )
+#define ARRANGE_ENDIAN_32(dat) ( (((dat) & 0xff000000 ) >> 24 ) | (((dat) & 0x00ff0000 ) >> 8 ) | (((dat) & 0x0000ff00 ) << 8 ) | (((dat) & 0x000000ff ) << 24 ) )
+
+#ifdef WORDS_BIGENDIAN
+# define ARRANGE_BE16(dat) (dat)
+# define ARRANGE_BE32(dat) (dat)
+# define ARRANGE_LE16(dat) ARRANGE_ENDIAN_16(dat)
+# define ARRANGE_LE32(dat) ARRANGE_ENDIAN_32(dat)
+#else
+# define ARRANGE_BE16(dat) ARRANGE_ENDIAN_16(dat)
+# define ARRANGE_BE32(dat) ARRANGE_ENDIAN_32(dat)
+# define ARRANGE_LE16(dat) (dat)
+# define ARRANGE_LE32(dat) (dat)
+#endif /* WORDS_BIGENDIAN */
+
+
 
