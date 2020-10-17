@@ -780,7 +780,7 @@ AIFF_WriteSamplesRaw(AIFF_Ref w, void *samples, size_t len)
 		return (-1);
 	}
 
-        /* FIXME w->nSamples */
+	w->nSamples += len / w->segmentSize;
 	w->sampleBytes += len;
 	w->len += len;
 
