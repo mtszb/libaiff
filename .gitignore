@@ -1,0 +1,12 @@
+configure
+libaiff/config.h.in
+libaiff/config.h.in~
+autom4te.cache
+
+Makefile
+config.log
+config.status
+libaiff/config.h
+
+*.o
+*.a
