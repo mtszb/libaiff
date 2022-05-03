@@ -11,6 +11,13 @@ TABLE OF CONTENTS
 	
 1. Compilation and installation of LibAiff on UNIX systems
 		
+		If compiling directly from the source
+                repository, it will be necessary to generate
+                the configure script. This requires autoconf,
+                automake, and libtool to be installed.
+
+	% ./autogen.sh
+		
 		The default prefix for LIBAIFF installation
 		is `/usr/local'. Prefix means that libraries
 		will be installed on the lib/ subdirectory,
