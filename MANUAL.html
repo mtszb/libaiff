@@ -1,5 +1,4 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- $Id: MANUAL.html,v 1.17 2007/09/20 19:34:51 toad32767 Exp $ -->
 <!--
  ! Copyright (c) 2005, 2006 by Marco Trillo <marcotrillo@gmail.com>
  !
@@ -52,7 +51,7 @@ pre { padding-left: 2em; }
 <body>
 <div align="center">
 <h1>LibAiff Reference Manual</h1>
-<h4>LibAiff 4.99, $Revision: 1.17 $</h4>
+<h4>LibAiff 6.0, May 2022</h4>
 </div>
 <hr>
 <h2>Contents</h2>
@@ -88,7 +87,7 @@ to interchange digital audio.
 LibAiff wants to implement all the features of the <strong>AIFF 1.3 standard</strong>, including
 markers, comments, etc.
 </p>
-<h3>The LibAiff 5.0 version</h3>
+<h3>The LibAiff 6.0 version</h3>
 <p>
 This version of LibAiff supports the following features:
 </p>
@@ -103,7 +102,7 @@ This version of LibAiff supports the following features:
 <li> <strong>32-bit IEEE-754 floating point (float32)</strong></li>
 </ul></li>
 <li>Read &amp; write samples in all formats supported by the <strong>Audio IFF</strong> standard.</li>
-<li>Transparently receiving samples in 32-bit LPCM or floating-point PCM, with LibAiff doing all the conversions (if necessary).</li>
+<li>Transparently receiving samples in 32-bit LPCM, 16-bit LPCM or floating-point PCM, with LibAiff doing all the conversions (if necessary).</li>
 <li>Transparently writing 32-bit LPCM audio, with LibAiff doing all the conversions (if necessary).</li>
 <li>Getting and setting all the <strong>AIFF Attributes</strong>.</li>
 <li>Reading and writing <strong>markers</strong> to positions on the sound.</li>
@@ -479,15 +478,16 @@ extract all of the sound on an Audio IFF file by simply doing repeated calls in 
 <h2 id="section10">10. Reading sound samples: the normal mode</h2>
 <pre>
 int AIFF_ReadSamples32Bit(AIFF_Ref r,int32_t* samples,int nsamples) ;
+int AIFF_ReadSamples16Bit(AIFF_Ref r,int16_t* samples,int nsamples) ;
 int AIFF_ReadSamplesFloat(AIFF_Ref r,float* samples,int nsamples) ;
 </pre>
 <p>
-Use this function to avoid dealing with segments, multiple sample sizes or byte order: it will provide
-samples into 32-bit (4-byte) signed values or floating-point values (respectively). If the samples are not stored in the requested format in the file, LibAiff will do the necessary conversions.
+Use this family of functions to avoid dealing with segments, multiple sample sizes or byte order: they will provide
+samples into 32-bit (4-byte) signed values, 16-bit (2-byte) signed values or floating-point values (respectively). If the samples are not stored in the requested format in the file, LibAiff will do the necessary conversions.
 </p>
 <p>
 <tt>nsamples</tt> is the <strong>number of sample points</strong> you want to read. <tt>samples</tt> is an array
-of 32-bit signed values or floating-point values (respectively).
+of 32-bit signed values, 16-bit signed values or floating-point values (respectively).
 </p>
 <p>
 The function will return the n. of sample points read from the file. If the returned value is <strong>0</strong>, no more samples are present on the file. If it`s <strong>-1</strong>, an error occurred.

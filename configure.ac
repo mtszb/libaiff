@@ -1,9 +1,9 @@
 AC_PREREQ(2.60)
-AC_INIT([libaiff], [4.99], [marcotrillo@gmail.com])
+AC_INIT([libaiff], [6.0], [marcotrillo@gmail.com])
 
 # Libtool shared library versioning based on ABI: current[:revision[:age]]
 # https://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
-AC_SUBST([LIBAIFF_LIB_VERSION], [0:0:0])
+AC_SUBST([LIBAIFF_LIB_VERSION], [2:0:0])
 
 # Where to find additional m4 macros
 AC_CONFIG_MACRO_DIR([m4])
