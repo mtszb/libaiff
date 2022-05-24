@@ -110,16 +110,18 @@ alawdec(uint8_t x)
 }
 
 static  uint8_t
-alawenc(int16_t x)
+alawenc(int16_t y)
 {
+        int x = y;
         int sgn, exp;
         uint8_t out;
-        
-        x >>= 4;
+
+        if (x == -32768) x = -32767;
         sgn = x < 0;                                /* get sgn */
         if (0 != sgn)
                 x = -x;                             /* get 11-bit magnitude */
-                
+        x >>= 4;
+
         exp = expt[x >> 4];                         /* get exponent */
         if (0 != exp)
                 x >>= exp - 1;                      /* hidden bit */
